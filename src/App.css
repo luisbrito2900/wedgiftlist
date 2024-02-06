@@ -62,10 +62,10 @@
 }
 
 .hover-image {
-  max-width: 200px; /* Ajusta este valor según tus necesidades */
-  max-height: 200px; /* Ajusta este valor según tus necesidades */
-  width: auto; /* Mantiene la relación de aspecto de la imagen */
-  height: auto; /* Mantiene la relación de aspecto de la imagen */
+  max-width: 200px;
+  max-height: 200px;
+  width: auto;
+  height: auto;
 }
 
 .gift-item button {
