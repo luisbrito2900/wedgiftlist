@@ -16,7 +16,6 @@ const gifts = [
     imageUrl: imagenCopas,
     description: "Descripción del set de copas.",
   },
-  // Añade nuevos regalos aquí
   {
     id: 3,
     name: "Juego de Platos",

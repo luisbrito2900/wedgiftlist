@@ -1,32 +1,35 @@
 import React, { useState } from "react";
-import Button from "react-bootstrap/Button"; // Importar Button de React Bootstrap si lo estás utilizando
+import Button from "react-bootstrap/Button";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function GiftItem({ gift, onGiftSelect }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div
-      className="gift-item"
+      className="gift-item card mb-3"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <h3>{gift.name}</h3>
+      <div className="card-header">
+        <h3>{gift.name}</h3>
+      </div>
       {isHovered && (
-        <>
-          <div>
-            <img
-              src={gift.imageUrl}
-              alt={gift.name}
-              className="card-img-top hover-image"
-            />
-            <p>{gift.description}</p>
-          </div>
+        <div className="card-body">
+          <img
+            src={gift.imageUrl}
+            alt={gift.name}
+            className="card-img-top hover-image"
+          />
+          <p className="card-text">{gift.description}</p>
           <Button onClick={() => onGiftSelect(gift.id)} variant="primary">
-            Seleccionar Regalo
+            Seleccionar regalo
           </Button>
-        </>
+        </div>
       )}
-      <p>Quedan: {gift.quantity}</p>
+      <div className="card-footer">
+        <p>Quedan: {gift.quantity}</p>
+      </div>
     </div>
   );
 }
