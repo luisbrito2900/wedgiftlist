@@ -1,8 +1,8 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { BsTrash } from "react-icons/bs";
 
-function GiftItem({ gift, onGiftSelect }) {
+function GiftItem({ gift, onGiftSelect, onGiftDeselect }) {
   return (
     <div className="gift-item card mb-3">
       <div className="card-header">
@@ -15,13 +15,31 @@ function GiftItem({ gift, onGiftSelect }) {
           className="card-img-top hover-image"
         />
         <p className="card-text">{gift.description}</p>
-        <Button
-          data-testid="seleccionar-regalo-btn"
-          onClick={() => onGiftSelect(gift.id)}
-          variant="primary"
+        {}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "start",
+            alignItems: "center",
+          }}
         >
-          Seleccionar regalo
-        </Button>
+          {}
+          <Button
+            onClick={() => onGiftDeselect(gift.id)}
+            variant="danger"
+            className="me-2"
+          >
+            <BsTrash /> {}
+          </Button>
+          {}
+          <Button
+            data-testid="seleccionar-regalo-btn"
+            onClick={() => onGiftSelect(gift.id)}
+            variant="primary"
+          >
+            Seleccionar regalo
+          </Button>
+        </div>
       </div>
       <div className="card-footer">
         <p>Quedan: {gift.quantity}</p>

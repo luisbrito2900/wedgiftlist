@@ -15,11 +15,29 @@ function GiftList() {
 
     setGifts(updatedGifts);
   };
+  const handleGiftDeselect = (selectedId) => {
+    const updatedGifts = gifts.map((gift) => {
+      if (
+        gift.id === selectedId &&
+        gift.quantity < mockData.find((item) => item.id === selectedId).quantity
+      ) {
+        return { ...gift, quantity: gift.quantity + 1 };
+      }
+      return gift;
+    });
+
+    setGifts(updatedGifts);
+  };
 
   return (
     <div className="gift-list">
       {gifts.map((gift) => (
-        <GiftItem key={gift.id} gift={gift} onGiftSelect={handleGiftSelect} />
+        <GiftItem
+          key={gift.id}
+          gift={gift}
+          onGiftSelect={handleGiftSelect}
+          onGiftDeselect={handleGiftDeselect}
+        />
       ))}
     </div>
   );
