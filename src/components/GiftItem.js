@@ -15,6 +15,7 @@ function GiftItem({ gift, onGiftSelect, onGiftDeselect }) {
           className="card-img-top hover-image"
         />
         <p className="card-text">{gift.description}</p>
+        <p className="card-text">Precio: RD${gift.price}</p>
         {}
         <div
           style={{
