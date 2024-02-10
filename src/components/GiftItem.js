@@ -3,13 +3,13 @@ import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function GiftItem({ gift, onGiftSelect }) {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState(true);
 
   return (
     <div
       className="gift-item card mb-3"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      // onMouseEnter={() => setIsHovered(true)}
+      // onMouseLeave={() => setIsHovered(false)}
     >
       <div className="card-header">
         <h3>{gift.name}</h3>
@@ -28,7 +28,12 @@ function GiftItem({ gift, onGiftSelect }) {
         </div>
       )}
       <div className="card-footer">
-        <p>Quedan: {gift.quantity}</p>
+        <p>Quedan: {gift.quantity}</p> {/* Siempre muestra la cantidad */}
+        {gift.quantity === 0 && (
+          <p style={{ color: "red", fontWeight: "bold" }}>
+            Agotado: Ya no quedan unidades disponibles.
+          </p>
+        )}
       </div>
     </div>
   );
