@@ -42,8 +42,7 @@ function GiftList() {
     const selectedGift = gifts.find((gift) => gift.id === selectedId);
 
     if (selectedGift) {
-      // Asegúrate de definir MAX_QUANTITY o usar selectedGift.maxQuantity si es específico de cada regalo
-      const MAX_QUANTITY = selectedGift.maxQuantity || 10; // Ejemplo con valor fallback
+      const MAX_QUANTITY = selectedGift.maxQuantity || 10;
       const newQuantity =
         selectedGift.quantity < MAX_QUANTITY
           ? selectedGift.quantity + 1
