@@ -30,7 +30,6 @@ const gifts = [
     imageUrl: imagenToallas,
     description: "Descripción del set de toallas.",
   },
-  // ... más regalos
 ];
 
 export default gifts;
