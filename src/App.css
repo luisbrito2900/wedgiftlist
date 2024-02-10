@@ -1,25 +1,40 @@
 .App-header {
-  background-color: #0bd185;
+  background-color: #6febbb;
   min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(87, 84, 84);
+  box-shadow: 0 2px 4px rgba(12, 12, 12, 0.719);
 }
 
 .gift-item {
-  cursor: auto;
-  border: 1px solid #ddd;
-  padding: 10px;
-  margin: 10px;
+  width: 300px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  border: 1px solid #2ca128b6;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(27, 27, 27, 0.719);
+}
+
+.gift-item h3 {
+  font-size: 1.2rem;
+  word-wrap: break-word;
 }
 
 .gift-list {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.gift-list .gift-item:first-child {
+  margin-top: 15px;
 }
 
 .hover-image {
