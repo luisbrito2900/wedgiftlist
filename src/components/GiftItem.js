@@ -6,7 +6,7 @@ function GiftItem({ gift, onGiftSelect, onGiftDeselect }) {
   return (
     <div className="gift-item card mb-3">
       <div className="card-header">
-        <h3>{gift.name}</h3>
+        <h3 data-testid="giftName">{gift.name}</h3>
       </div>
       <div className="card-body">
         <img
@@ -14,8 +14,9 @@ function GiftItem({ gift, onGiftSelect, onGiftDeselect }) {
           alt={gift.name}
           className="card-img-top hover-image"
         />
-        <p className="card-text">{gift.description}</p>
-        <p className="card-text">Precio: RD${gift.price}</p>
+        <p className="card-text" data-testid="price">
+          Precio: RD${gift.price}
+        </p>
         {}
         <div
           style={{
@@ -26,6 +27,7 @@ function GiftItem({ gift, onGiftSelect, onGiftDeselect }) {
         >
           {}
           <Button
+            data-testid="removeGiftBtn"
             onClick={() => onGiftDeselect(gift.id)}
             variant="danger"
             className="me-2"
@@ -34,7 +36,7 @@ function GiftItem({ gift, onGiftSelect, onGiftDeselect }) {
           </Button>
           {}
           <Button
-            data-testid="seleccionar-regalo-btn"
+            data-testid="selectGiftBtn"
             onClick={() => onGiftSelect(gift.id)}
             variant="primary"
           >
@@ -43,9 +45,12 @@ function GiftItem({ gift, onGiftSelect, onGiftDeselect }) {
         </div>
       </div>
       <div className="card-footer">
-        <p>Quedan: {gift.quantity}</p>
+        <p data-testid="remainingGifts">Quedan: {gift.quantity}</p>
         {gift.quantity === 0 && (
-          <p style={{ color: "red", fontWeight: "bold" }}>
+          <p
+            data-testid="noRemainingGiftsMessage"
+            style={{ color: "red", fontWeight: "bold" }}
+          >
             Agotado: Ya no quedan unidades disponibles.
           </p>
         )}
