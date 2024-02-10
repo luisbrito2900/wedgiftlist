@@ -15,7 +15,11 @@ function GiftItem({ gift, onGiftSelect }) {
           className="card-img-top hover-image"
         />
         <p className="card-text">{gift.description}</p>
-        <Button onClick={() => onGiftSelect(gift.id)} variant="primary">
+        <Button
+          data-testid="seleccionar-regalo-btn"
+          onClick={() => onGiftSelect(gift.id)}
+          variant="primary"
+        >
           Seleccionar regalo
         </Button>
       </div>

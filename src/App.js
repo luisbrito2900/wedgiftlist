@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1 data-testid="pageTitle">Lista de regalos de boda</h1>
+        <h1 data-testid="page-Title">Lista de regalos de boda</h1>
       </header>
       <GiftList />
     </div>
