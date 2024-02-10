@@ -1,32 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import GiftItem from "./GiftItem";
-import mockData from "../data/mockData";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
+import app from "../firebase/firebase-config";
 
 function GiftList() {
-  const [gifts, setGifts] = useState(mockData);
+  const [gifts, setGifts] = useState([]);
+  const db = getFirestore(app);
 
-  const handleGiftSelect = (selectedId) => {
-    const updatedGifts = gifts.map((gift) => {
-      if (gift.id === selectedId && gift.quantity > 0) {
-        return { ...gift, quantity: gift.quantity - 1 };
-      }
-      return gift;
-    });
-
-    setGifts(updatedGifts);
+  const fetchGifts = async () => {
+    const querySnapshot = await getDocs(collection(db, "gifts"));
+    const giftsArray = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    setGifts(giftsArray);
   };
-  const handleGiftDeselect = (selectedId) => {
-    const updatedGifts = gifts.map((gift) => {
-      if (
-        gift.id === selectedId &&
-        gift.quantity < mockData.find((item) => item.id === selectedId).quantity
-      ) {
-        return { ...gift, quantity: gift.quantity + 1 };
-      }
-      return gift;
-    });
 
-    setGifts(updatedGifts);
+  useEffect(() => {
+    fetchGifts();
+  }, []);
+
+  const handleGiftSelect = async (selectedId) => {
+    const giftRef = doc(db, "gifts", selectedId);
+    const selectedGift = gifts.find((gift) => gift.id === selectedId);
+    if (selectedGift && selectedGift.quantity > 0) {
+      await updateDoc(giftRef, {
+        quantity: selectedGift.quantity - 1,
+      });
+      fetchGifts();
+    }
+  };
+
+  const handleGiftDeselect = async (selectedId) => {
+    const giftRef = doc(db, "gifts", selectedId);
+    const selectedGift = gifts.find((gift) => gift.id === selectedId);
+
+    if (selectedGift) {
+      const MAX_QUANTITY = selectedGift.maxQuantity || 10;
+      const newQuantity =
+        selectedGift.quantity < MAX_QUANTITY
+          ? selectedGift.quantity + 1
+          : MAX_QUANTITY;
+
+      await updateDoc(giftRef, {
+        quantity: newQuantity,
+      });
+      fetchGifts();
+    }
   };
 
   return (
