@@ -1,5 +1,5 @@
 # wedgiftlist
 
-Weeding Gift List
+Wedding Gift List
 
 React practice
