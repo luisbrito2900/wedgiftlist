@@ -9,7 +9,7 @@ import {
 } from "firebase/firestore";
 import app from "../firebase/firebase-config";
 
-function GiftList() {
+function GiftList({ isRegistered }) {
   const [gifts, setGifts] = useState([]);
   const db = getFirestore(app);
 
@@ -27,6 +27,10 @@ function GiftList() {
   }, []);
 
   const handleGiftSelect = async (selectedId) => {
+    if (!isRegistered) {
+      alert("Debes estar registrado para seleccionar un regalo.");
+      return;
+    }
     const giftRef = doc(db, "gifts", selectedId);
     const selectedGift = gifts.find((gift) => gift.id === selectedId);
     if (selectedGift && selectedGift.quantity > 0) {
@@ -38,6 +42,10 @@ function GiftList() {
   };
 
   const handleGiftDeselect = async (selectedId) => {
+    if (!isRegistered) {
+      alert("Debes estar registrado para deseleccionar un regalo.");
+      return;
+    }
     const giftRef = doc(db, "gifts", selectedId);
     const selectedGift = gifts.find((gift) => gift.id === selectedId);
 
@@ -63,6 +71,7 @@ function GiftList() {
           gift={gift}
           onGiftSelect={handleGiftSelect}
           onGiftDeselect={handleGiftDeselect}
+          isRegistered={isRegistered}
         />
       ))}
     </div>

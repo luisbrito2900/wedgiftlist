@@ -1,8 +1,27 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import { BsTrash } from "react-icons/bs";
+import { useAuth } from "../context/AuthContext"; // Asegúrate de ajustar la ruta a tu estructura de archivos
 
 function GiftItem({ gift, onGiftSelect, onGiftDeselect }) {
+  const { isRegistered } = useAuth(); // Utiliza el contexto de autenticación aquí
+
+  const handleSelect = () => {
+    if (!isRegistered) {
+      alert("Debes estar registrado para poder seleccionar regalos.");
+      return;
+    }
+    onGiftSelect(gift.id);
+  };
+
+  const handleDeselect = () => {
+    if (!isRegistered) {
+      alert("Debes estar registrado para poder deseleccionar regalos.");
+      return;
+    }
+    onGiftDeselect(gift.id);
+  };
+
   return (
     <div className="gift-item card mb-3">
       <div className="card-header">
@@ -15,9 +34,8 @@ function GiftItem({ gift, onGiftSelect, onGiftDeselect }) {
           className="card-img-top hover-image"
         />
         <p className="card-text" data-testid="price">
-          Precio: RD${gift.price}
+          Precio: ${gift.price}
         </p>
-        {}
         <div
           style={{
             display: "flex",
@@ -25,20 +43,20 @@ function GiftItem({ gift, onGiftSelect, onGiftDeselect }) {
             alignItems: "center",
           }}
         >
-          {}
           <Button
             data-testid="removeGiftBtn"
-            onClick={() => onGiftDeselect(gift.id)}
+            onClick={handleDeselect}
             variant="danger"
             className="me-2"
+            disabled={!isRegistered} // Los botones están condicionalmente deshabilitados basados en isRegistered
           >
-            <BsTrash /> {}
+            <BsTrash />
           </Button>
-          {}
           <Button
             data-testid="selectGiftBtn"
-            onClick={() => onGiftSelect(gift.id)}
+            onClick={handleSelect}
             variant="primary"
+            disabled={!isRegistered} // Los botones están condicionalmente deshabilitados basados en isRegistered
           >
             Seleccionar regalo
           </Button>
