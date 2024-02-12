@@ -15,6 +15,9 @@ import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { db, auth } from "../firebase/firebase-config";
 import { useAuth } from "../context/AuthContext";
+import logoPopular from "../images/bancopopular.png"; // Ajusta la ruta
+import logoBHD from "../images/bhd.jpg"; // Ajusta la ruta
+import logoBanreservas from "../images/banreservas.png";
 
 function GiftList() {
   const [gifts, setGifts] = useState([]);
@@ -85,6 +88,52 @@ function GiftList() {
 
   return (
     <div className="gift-list-container">
+      <div className="message-box form-container" id="weddgiftlistcontainer">
+        <p className="message-box form-container">
+          Tu presencia en nuestra boda es el regalo más grande que podríamos
+          recibir. Si deseas hacernos un regalo, apreciaríamos mucho tu
+          contribución en efectivo para ayudarnos a comenzar esta nueva etapa
+          juntos.
+        </p>
+        <div className="message-box form-container " id="nameandidcontainer">
+          <p>Nombre: Luis Jahziel Brito</p>
+          <p>Cédula: 402-1956172-3</p>
+        </div>
+
+        <div className="message-box form-container " id="popularaccount">
+          <div className="centered-content">
+            <img
+              src={logoPopular}
+              alt="Banco Popular"
+              style={{ width: "50px" }}
+            />
+          </div>
+
+          <p>Cta de ahorro. No. de cuenta: 824671333</p>
+        </div>
+
+        <div className="message-box form-container" id="bhdaccount">
+          <div className="centered-content">
+            <img src={logoBHD} alt="Banco BHD" style={{ width: "50px" }} />
+          </div>
+
+          <p>Cta de ahorro. No. de cuenta: 29766160023</p>
+        </div>
+
+        <div className="message-box form-container" id="banreservasaccount">
+          <div className="centered-content">
+            <img
+              src={logoBanreservas}
+              alt="Banreservas"
+              style={{ width: "50px" }}
+            />
+          </div>
+
+          <p>Cta de ahorro. No. de cuenta: 9601925363</p>
+        </div>
+
+        <p>De igual manera, abajo se encuentra la lista de regalos.</p>
+      </div>
       <h1 className="gift-list-title">Lista de Regalos</h1>
       {currentUser && (
         <button onClick={handleLogout} className="logout-button">
