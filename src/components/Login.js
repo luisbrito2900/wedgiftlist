@@ -55,7 +55,7 @@ const Login = () => {
           Iniciar sesión
         </button>
       </form>
-      {error && <p className="error-message">{error}</p>} {}
+      {error && <p className="error-message">{error}</p>}
       <div className="link-container">
         <Link to="/homePage" className="form-link">
           Volver a la página principal

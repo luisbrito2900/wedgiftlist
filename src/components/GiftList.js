@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from "react";
 import GiftItem from "./GiftItem";
-import {
-  getFirestore,
-  collection,
-  getDocs,
-  doc,
-  updateDoc,
-} from "firebase/firestore";
-import { getAuth, signOut } from "firebase/auth";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import { collection, getDocs, doc, updateDoc } from "firebase/firestore";
+import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { db, auth } from "../firebase/firebase-config";
 import { useAuth } from "../context/AuthContext";
 
 function GiftList() {
   const [gifts, setGifts] = useState([]);
-  // const db = getFirestore(app);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedGiftId, setSelectedGiftId] = useState(null);
   const navigate = useNavigate();
   const { currentUser } = useAuth();
 
@@ -35,30 +32,24 @@ function GiftList() {
     }
   }, [currentUser, navigate, db]);
 
-  const handleGiftSelect = async (selectedId) => {
-    const giftRef = doc(db, "gifts", selectedId);
-    const selectedGift = gifts.find((gift) => gift.id === selectedId);
-    if (selectedGift && selectedGift.quantity > 0) {
-      await updateDoc(giftRef, {
-        quantity: selectedGift.quantity - 1,
-      });
-      fetchGifts();
+  const handleGiftSelect = async () => {
+    if (selectedGiftId) {
+      const giftRef = doc(db, "gifts", selectedGiftId);
+      const selectedGift = gifts.find((gift) => gift.id === selectedGiftId);
+      if (selectedGift && selectedGift.quantity > 0) {
+        await updateDoc(giftRef, { quantity: selectedGift.quantity - 1 });
+        setShowModal(false);
+        fetchGifts();
+      }
     }
   };
 
-  const handleGiftDeselect = async (selectedId) => {
-    const giftRef = doc(db, "gifts", selectedId);
-    const selectedGift = gifts.find((gift) => gift.id === selectedId);
-    if (selectedGift && selectedGift.quantity < selectedGift.maxQuantity) {
-      await updateDoc(giftRef, {
-        quantity: selectedGift.quantity + 1,
-      });
-      fetchGifts();
-    }
+  const openModal = (giftId) => {
+    setSelectedGiftId(giftId);
+    setShowModal(true);
   };
 
   const handleLogout = async () => {
-    // const auth = getAuth();
     try {
       await signOut(auth);
       navigate("/login");
@@ -80,11 +71,27 @@ function GiftList() {
           <GiftItem
             key={gift.id}
             gift={gift}
-            onGiftSelect={() => handleGiftSelect(gift.id)}
-            onGiftDeselect={() => handleGiftDeselect(gift.id)}
+            onOpenModal={() => openModal(gift.id)}
           />
         ))}
       </div>
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirmar selección</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          ¿Estás seguro que quieres seleccionar este regalo? Esta acción no se
+          puede deshacer.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Cancelar
+          </Button>
+          <Button variant="primary" onClick={handleGiftSelect}>
+            Confirmar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
