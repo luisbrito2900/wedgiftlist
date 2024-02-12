@@ -181,3 +181,9 @@
   color: red; /* Color rojo para los mensajes de error */
   margin-top: 10px; /* Margen superior para separarlo del formulario */
 }
+
+.centered-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
