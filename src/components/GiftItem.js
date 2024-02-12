@@ -15,9 +15,8 @@ function GiftItem({ gift, onGiftSelect, onGiftDeselect }) {
           className="card-img-top hover-image"
         />
         <p className="card-text" data-testid="price">
-          Precio: RD${gift.price}
+          Precio: ${gift.price}
         </p>
-        {}
         <div
           style={{
             display: "flex",
@@ -25,16 +24,14 @@ function GiftItem({ gift, onGiftSelect, onGiftDeselect }) {
             alignItems: "center",
           }}
         >
-          {}
           <Button
             data-testid="removeGiftBtn"
             onClick={() => onGiftDeselect(gift.id)}
             variant="danger"
             className="me-2"
           >
-            <BsTrash /> {}
+            <BsTrash />
           </Button>
-          {}
           <Button
             data-testid="selectGiftBtn"
             onClick={() => onGiftSelect(gift.id)}

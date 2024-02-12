@@ -49,3 +49,135 @@
   flex-direction: column;
   align-items: center;
 }
+
+.form-container {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 400px;
+  margin: 40px auto;
+}
+
+.form-input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box; /* Asegura que padding no aumente el tamaño del input */
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.form-button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+}
+
+.link-container {
+  text-align: center;
+  margin-top: 20px; /* Ajusta el margen superior para separar del formulario */
+}
+
+.form-link {
+  text-decoration: none;
+  color: #007bff;
+  margin: 10px; /* Aumenta el margen para separar los enlaces */
+  display: inline-block; /* Importante para aplicar margen a elementos inline */
+}
+
+.form-link:hover {
+  text-decoration: underline;
+}
+
+.home-container {
+  text-align: center;
+  padding: 40px;
+  max-width: 600px;
+  margin: 50px auto;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.home-actions .btn {
+  padding: 10px 20px;
+  margin: 20px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: white;
+  display: inline-block; /* Asegura que los botones estén uno al lado del otro */
+}
+
+.btn-primary {
+  background-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+}
+
+.btn-secondary:hover {
+  background-color: #565e64;
+}
+
+.gift-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+}
+
+/* Estilos para el botón de Cerrar Sesión */
+.logout-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #007bff; /* Color de fondo azul */
+  color: white; /* Texto en color blanco */
+  border: none;
+  border-radius: 20px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor a una mano */
+  font-weight: bold; /* Texto en negrita */
+  transition: background-color 0.3s ease; /* Transición suave al cambiar de color */
+}
+
+.logout-button:hover {
+  background-color: #0056b3; /* Color más oscuro al pasar el ratón por encima */
+}
+
+/* Estilos para el título Lista de Regalos */
+.gift-list-title {
+  font-size: 24px; /* Tamaño de letra más pequeño */
+  font-style: italic; /* Texto en cursiva */
+  margin: 20px 0; /* Margen superior e inferior */
+  text-align: center; /* Centra el texto */
+  width: 100%; /* Asegura que el título se extienda a lo ancho */
+}
+
+.error-message {
+  color: red; /* Color rojo para los mensajes de error */
+  margin-top: 10px; /* Margen superior para separarlo del formulario */
+}
