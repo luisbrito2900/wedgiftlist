@@ -56,7 +56,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
   max-width: 400px;
-  margin: 40px auto;
+  margin: 50px auto;
 }
 
 .form-input {
@@ -66,7 +66,7 @@
   margin: 10px 0 20px;
   border-radius: 5px;
   border: 1px solid #ccc;
-  box-sizing: border-box; /* Asegura que padding no aumente el tamaño del input */
+  box-sizing: border-box;
 }
 
 .form-input:focus {
@@ -92,14 +92,14 @@
 
 .link-container {
   text-align: center;
-  margin-top: 20px; /* Ajusta el margen superior para separar del formulario */
+  margin-top: 20px;
 }
 
 .form-link {
   text-decoration: none;
   color: #007bff;
-  margin: 10px; /* Aumenta el margen para separar los enlaces */
-  display: inline-block; /* Importante para aplicar margen a elementos inline */
+  margin: 10px;
+  display: inline-block;
 }
 
 .form-link:hover {
@@ -122,7 +122,7 @@
   border-radius: 5px;
   text-decoration: none;
   color: white;
-  display: inline-block; /* Asegura que los botones estén uno al lado del otro */
+  display: inline-block;
 }
 
 .btn-primary {
@@ -149,41 +149,64 @@
   min-height: 100vh;
 }
 
-/* Estilos para el botón de Cerrar Sesión */
 .logout-button {
   position: absolute;
   top: 20px;
   right: 20px;
   padding: 10px 20px;
-  background-color: #007bff; /* Color de fondo azul */
-  color: white; /* Texto en color blanco */
+  background-color: #007bff;
+  color: white;
   border: none;
-  border-radius: 20px; /* Bordes redondeados */
-  cursor: pointer; /* Cambia el cursor a una mano */
-  font-weight: bold; /* Texto en negrita */
-  transition: background-color 0.3s ease; /* Transición suave al cambiar de color */
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
 .logout-button:hover {
-  background-color: #0056b3; /* Color más oscuro al pasar el ratón por encima */
+  background-color: #0056b3;
 }
 
-/* Estilos para el título Lista de Regalos */
 .gift-list-title {
-  font-size: 24px; /* Tamaño de letra más pequeño */
-  font-style: italic; /* Texto en cursiva */
-  margin: 20px 0; /* Margen superior e inferior */
-  text-align: center; /* Centra el texto */
-  width: 100%; /* Asegura que el título se extienda a lo ancho */
+  font-size: 24px;
+  font-style: italic;
+  margin: 20px 0;
+  text-align: center;
+  width: 100%;
 }
 
 .error-message {
-  color: red; /* Color rojo para los mensajes de error */
-  margin-top: 10px; /* Margen superior para separarlo del formulario */
+  color: red;
+  margin-top: 10px;
 }
 
 .centered-content {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+.cedula {
+  margin-top: -20px;
+  margin-bottom: 1px;
+}
+
+.datos-nombre {
+  margin-bottom: -20px;
+}
+
+.cuenta-container {
+  margin-bottom: 10px;
+}
+
+.main-text {
+  margin-top: 1px;
+}
+
+.account-number {
+  margin-top: -20px;
 }

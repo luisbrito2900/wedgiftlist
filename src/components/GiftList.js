@@ -96,7 +96,7 @@ function GiftList() {
   return (
     <div className="gift-list-container">
       <div className="message-box form-container" id="weddgiftlistcontainer">
-        <p className="message-box form-container">
+        <p className="message-box form-container text-justify main-text">
           Bienvenidos (as) a la lista de regalos para la boda de Luis y Perla.
           Tu presencia en nuestra boda es uno de los mejores regalos que
           podríamos recibir, pero si deseas hacernos un regalo apreciaríamos
@@ -108,12 +108,27 @@ function GiftList() {
           total del articulo seleccionado y en caso de adquirirlos, por favor
           hacerlo llegar a los novios con anterioridad a la boda.
         </p>
-        <div className="message-box form-container " id="nameandidcontainer">
+        <p
+          style={{ textAlign: "center " }}
+          className="text-justify datos-nombre"
+        >
+          Datos para la transferencia:
+        </p>
+
+        <div
+          className="message-box form-container"
+          style={{ textAlign: "center" }}
+          x
+          id="nameandidcontainer"
+        >
           <p>Nombre: Luis Jahziel Brito</p>
-          <p>Cédula: 402-1956172-3</p>
+          <p className="cedula">Cédula: 402-1956172-3</p>
         </div>
 
-        <div className="message-box form-container " id="popularaccount">
+        <div
+          className="message-box form-container cuenta-container"
+          id="popularaccount"
+        >
           <div className="centered-content">
             <img
               src={logoPopular}
@@ -122,18 +137,30 @@ function GiftList() {
             />
           </div>
 
-          <p>Cta de ahorro. No. de cuenta: 824671333</p>
+          <p style={{ textAlign: "center " }}>Cuenta de ahorro</p>
+          <p className="account-number" style={{ textAlign: "center " }}>
+            Numero de cuenta: 824671333
+          </p>
         </div>
 
-        <div className="message-box form-container" id="bhdaccount">
+        <div
+          className="message-box form-container cuenta-container"
+          id="bhdaccount"
+        >
           <div className="centered-content">
             <img src={logoBHD} alt="Banco BHD" style={{ width: "50px" }} />
           </div>
 
-          <p>Cta de ahorro. No. de cuenta: 29766160023</p>
+          <p style={{ textAlign: "center " }}>Cuenta de ahorro</p>
+          <p className="account-number" style={{ textAlign: "center " }}>
+            Numero de cuenta: 29766160023
+          </p>
         </div>
 
-        <div className="message-box form-container" id="banreservasaccount">
+        <div
+          className="message-box form-container cuenta-container"
+          id="banreservasaccount"
+        >
           <div className="centered-content">
             <img
               src={logoBanreservas}
@@ -142,10 +169,11 @@ function GiftList() {
             />
           </div>
 
-          <p>Cta de ahorro. No. de cuenta: 9601925363</p>
+          <p style={{ textAlign: "center " }}>Cuenta de ahorro</p>
+          <p className="account-number" style={{ textAlign: "center " }}>
+            Numero de cuenta: 9601925363
+          </p>
         </div>
-
-        <p>De igual manera, abajo se encuentra la lista de regalos.</p>
       </div>
       <h1 className="gift-list-title">Lista de Regalos</h1>
       {currentUser && (
