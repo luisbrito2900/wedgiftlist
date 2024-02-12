@@ -6,6 +6,7 @@ import {
   addDoc,
   collection,
   getDocs,
+  getDoc,
   doc,
   updateDoc,
   Timestamp,
@@ -43,21 +44,27 @@ function GiftList() {
     if (selectedGiftId) {
       const giftRef = doc(db, "gifts", selectedGiftId);
       const selectedGift = gifts.find((gift) => gift.id === selectedGiftId);
-      const user = auth.currentUser; // Asume que ya tienes auth configurado y el usuario ha iniciado sesión
+      const user = auth.currentUser;
+
       if (selectedGift && selectedGift.quantity > 0 && user) {
+        const userDocRef = doc(db, "users", user.uid);
+        const userDoc = await getDoc(userDocRef);
+        const userName = userDoc.exists()
+          ? userDoc.data().name
+          : "Usuario Desconocido";
+
         await updateDoc(giftRef, { quantity: selectedGift.quantity - 1 });
 
-        // Añadir el registro de la selección del regalo
         await addDoc(collection(db, "selecciones"), {
           userId: user.uid,
-          userName: user.displayName || "Usuario Desconocido", // Usar displayName o un placeholder
+          userName: userName,
           giftId: selectedGiftId,
-          giftName: selectedGift.name, // Asume que tu objeto de regalo tiene un campo 'name'
-          timestamp: Timestamp.now(), // Marca de tiempo de la selección
+          giftName: selectedGift.name,
+          timestamp: Timestamp.now(),
         });
 
         setShowModal(false);
-        fetchGifts(); // Actualizar la lista de regalos después de la selección
+        fetchGifts();
       }
     }
   };
