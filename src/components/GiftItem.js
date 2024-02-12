@@ -1,27 +1,8 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import { BsTrash } from "react-icons/bs";
-import { useAuth } from "../context/AuthContext";
 
 function GiftItem({ gift, onGiftSelect, onGiftDeselect }) {
-  const { isRegistered } = useAuth();
-
-  const handleSelect = () => {
-    if (!isRegistered) {
-      alert("Debes estar registrado para poder seleccionar regalos.");
-      return;
-    }
-    onGiftSelect(gift.id);
-  };
-
-  const handleDeselect = () => {
-    if (!isRegistered) {
-      alert("Debes estar registrado para poder deseleccionar regalos.");
-      return;
-    }
-    onGiftDeselect(gift.id);
-  };
-
   return (
     <div className="gift-item card mb-3">
       <div className="card-header">
@@ -45,18 +26,16 @@ function GiftItem({ gift, onGiftSelect, onGiftDeselect }) {
         >
           <Button
             data-testid="removeGiftBtn"
-            onClick={handleDeselect}
+            onClick={() => onGiftDeselect(gift.id)}
             variant="danger"
             className="me-2"
-            disabled={!isRegistered}
           >
             <BsTrash />
           </Button>
           <Button
             data-testid="selectGiftBtn"
-            onClick={handleSelect}
+            onClick={() => onGiftSelect(gift.id)}
             variant="primary"
-            disabled={!isRegistered}
           >
             Seleccionar regalo
           </Button>
