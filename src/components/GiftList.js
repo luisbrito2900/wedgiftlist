@@ -2,7 +2,14 @@ import React, { useState, useEffect } from "react";
 import GiftItem from "./GiftItem";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import { collection, getDocs, doc, updateDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  getDocs,
+  doc,
+  updateDoc,
+  Timestamp,
+} from "firebase/firestore";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { db, auth } from "../firebase/firebase-config";
@@ -36,10 +43,21 @@ function GiftList() {
     if (selectedGiftId) {
       const giftRef = doc(db, "gifts", selectedGiftId);
       const selectedGift = gifts.find((gift) => gift.id === selectedGiftId);
-      if (selectedGift && selectedGift.quantity > 0) {
+      const user = auth.currentUser; // Asume que ya tienes auth configurado y el usuario ha iniciado sesión
+      if (selectedGift && selectedGift.quantity > 0 && user) {
         await updateDoc(giftRef, { quantity: selectedGift.quantity - 1 });
+
+        // Añadir el registro de la selección del regalo
+        await addDoc(collection(db, "selecciones"), {
+          userId: user.uid,
+          userName: user.displayName || "Usuario Desconocido", // Usar displayName o un placeholder
+          giftId: selectedGiftId,
+          giftName: selectedGift.name, // Asume que tu objeto de regalo tiene un campo 'name'
+          timestamp: Timestamp.now(), // Marca de tiempo de la selección
+        });
+
         setShowModal(false);
-        fetchGifts();
+        fetchGifts(); // Actualizar la lista de regalos después de la selección
       }
     }
   };
