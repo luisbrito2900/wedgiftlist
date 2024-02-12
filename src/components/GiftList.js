@@ -15,8 +15,8 @@ import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { db, auth } from "../firebase/firebase-config";
 import { useAuth } from "../context/AuthContext";
-import logoPopular from "../images/bancopopular.png"; // Ajusta la ruta
-import logoBHD from "../images/bhd.jpg"; // Ajusta la ruta
+import logoPopular from "../images/bancopopular.png";
+import logoBHD from "../images/bhd.jpg";
 import logoBanreservas from "../images/banreservas.png";
 
 function GiftList() {
@@ -25,6 +25,7 @@ function GiftList() {
   const [selectedGiftId, setSelectedGiftId] = useState(null);
   const navigate = useNavigate();
   const { currentUser } = useAuth();
+  const [showLogoutConfirmModal, setShowLogoutConfirmModal] = useState(false);
 
   const fetchGifts = async () => {
     const querySnapshot = await getDocs(collection(db, "gifts"));
@@ -77,12 +78,18 @@ function GiftList() {
     setShowModal(true);
   };
 
-  const handleLogout = async () => {
+  const handleLogoutPrompt = () => {
+    setShowLogoutConfirmModal(true);
+  };
+
+  const handleLogoutConfirm = async () => {
     try {
       await signOut(auth);
       navigate("/login");
     } catch (error) {
       console.error("Error al cerrar sesión", error);
+    } finally {
+      setShowLogoutConfirmModal(false);
     }
   };
 
@@ -90,10 +97,16 @@ function GiftList() {
     <div className="gift-list-container">
       <div className="message-box form-container" id="weddgiftlistcontainer">
         <p className="message-box form-container">
-          Tu presencia en nuestra boda es el regalo más grande que podríamos
-          recibir. Si deseas hacernos un regalo, apreciaríamos mucho tu
-          contribución en efectivo para ayudarnos a comenzar esta nueva etapa
-          juntos.
+          Bienvenidos (as) a la lista de regalos para la boda de Luis y Perla.
+          Tu presencia en nuestra boda es uno de los mejores regalos que
+          podríamos recibir, pero si deseas hacernos un regalo apreciaríamos
+          mucho su contribución en efectivo para ayudarnos a comenzar esta nueva
+          etapa juntos. De igual manera, a continuación, se encuentran los
+          artículos que complementan la lista de regalos, los mismos se
+          encuentran en plaza lama, en caso de no poder ir hasta el lugar para
+          adquirirlos, puedes hacerle una transferencia a los novios del monto
+          total del articulo seleccionado y en caso de adquirirlos, por favor
+          hacerlo llegar a los novios con anterioridad a la boda.
         </p>
         <div className="message-box form-container " id="nameandidcontainer">
           <p>Nombre: Luis Jahziel Brito</p>
@@ -136,10 +149,31 @@ function GiftList() {
       </div>
       <h1 className="gift-list-title">Lista de Regalos</h1>
       {currentUser && (
-        <button onClick={handleLogout} className="logout-button">
+        <button onClick={handleLogoutPrompt} className="logout-button">
           Cerrar sesión
         </button>
       )}
+      <Modal
+        show={showLogoutConfirmModal}
+        onHide={() => setShowLogoutConfirmModal(false)}
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Confirmar cierre de sesión</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>¿Estás seguro de que deseas salir?</Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="secondary"
+            onClick={() => setShowLogoutConfirmModal(false)}
+          >
+            Cancelar
+          </Button>
+          <Button variant="primary" onClick={handleLogoutConfirm}>
+            Confirmar
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <div className="gift-list">
         {gifts.map((gift) => (
           <GiftItem
