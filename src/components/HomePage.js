@@ -14,7 +14,7 @@ const HomePage = () => {
           Registrarse
         </Link>
         <Link to="/login" className="btn btn-secondary">
-          Iniciar Sesión
+          Iniciar sesión
         </Link>
       </div>
     </div>

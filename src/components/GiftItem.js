@@ -1,10 +1,10 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import { BsTrash } from "react-icons/bs";
-import { useAuth } from "../context/AuthContext"; // Asegúrate de ajustar la ruta a tu estructura de archivos
+import { useAuth } from "../context/AuthContext";
 
 function GiftItem({ gift, onGiftSelect, onGiftDeselect }) {
-  const { isRegistered } = useAuth(); // Utiliza el contexto de autenticación aquí
+  const { isRegistered } = useAuth();
 
   const handleSelect = () => {
     if (!isRegistered) {
@@ -48,7 +48,7 @@ function GiftItem({ gift, onGiftSelect, onGiftDeselect }) {
             onClick={handleDeselect}
             variant="danger"
             className="me-2"
-            disabled={!isRegistered} // Los botones están condicionalmente deshabilitados basados en isRegistered
+            disabled={!isRegistered}
           >
             <BsTrash />
           </Button>
@@ -56,7 +56,7 @@ function GiftItem({ gift, onGiftSelect, onGiftDeselect }) {
             data-testid="selectGiftBtn"
             onClick={handleSelect}
             variant="primary"
-            disabled={!isRegistered} // Los botones están condicionalmente deshabilitados basados en isRegistered
+            disabled={!isRegistered}
           >
             Seleccionar regalo
           </Button>

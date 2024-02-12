@@ -7,11 +7,16 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore";
-import app from "../firebase/firebase-config";
+import { getAuth, signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { db, auth } from "../firebase/firebase-config";
+import { useAuth } from "../context/AuthContext";
 
-function GiftList({ isRegistered }) {
+function GiftList() {
   const [gifts, setGifts] = useState([]);
-  const db = getFirestore(app);
+  // const db = getFirestore(app);
+  const navigate = useNavigate();
+  const { currentUser } = useAuth();
 
   const fetchGifts = async () => {
     const querySnapshot = await getDocs(collection(db, "gifts"));
@@ -23,14 +28,14 @@ function GiftList({ isRegistered }) {
   };
 
   useEffect(() => {
-    fetchGifts();
-  }, []);
+    if (!currentUser) {
+      navigate("/login");
+    } else {
+      fetchGifts();
+    }
+  }, [currentUser, navigate, db]);
 
   const handleGiftSelect = async (selectedId) => {
-    if (!isRegistered) {
-      alert("Debes estar registrado para seleccionar un regalo.");
-      return;
-    }
     const giftRef = doc(db, "gifts", selectedId);
     const selectedGift = gifts.find((gift) => gift.id === selectedId);
     if (selectedGift && selectedGift.quantity > 0) {
@@ -42,38 +47,44 @@ function GiftList({ isRegistered }) {
   };
 
   const handleGiftDeselect = async (selectedId) => {
-    if (!isRegistered) {
-      alert("Debes estar registrado para deseleccionar un regalo.");
-      return;
-    }
     const giftRef = doc(db, "gifts", selectedId);
     const selectedGift = gifts.find((gift) => gift.id === selectedId);
-
-    if (selectedGift) {
-      const MAX_QUANTITY = selectedGift.maxQuantity || 10;
-      const newQuantity =
-        selectedGift.quantity < MAX_QUANTITY
-          ? selectedGift.quantity + 1
-          : MAX_QUANTITY;
-
+    if (selectedGift && selectedGift.quantity < selectedGift.maxQuantity) {
       await updateDoc(giftRef, {
-        quantity: newQuantity,
+        quantity: selectedGift.quantity + 1,
       });
       fetchGifts();
     }
   };
 
+  const handleLogout = async () => {
+    // const auth = getAuth();
+    try {
+      await signOut(auth);
+      navigate("/login");
+    } catch (error) {
+      console.error("Error al cerrar sesión", error);
+    }
+  };
+
   return (
-    <div className="gift-list">
-      {gifts.map((gift) => (
-        <GiftItem
-          key={gift.id}
-          gift={gift}
-          onGiftSelect={handleGiftSelect}
-          onGiftDeselect={handleGiftDeselect}
-          isRegistered={isRegistered}
-        />
-      ))}
+    <div className="gift-list-container">
+      <h1 className="gift-list-title">Lista de Regalos</h1>
+      {currentUser && (
+        <button onClick={handleLogout} className="logout-button">
+          Cerrar sesión
+        </button>
+      )}
+      <div className="gift-list">
+        {gifts.map((gift) => (
+          <GiftItem
+            key={gift.id}
+            gift={gift}
+            onGiftSelect={() => handleGiftSelect(gift.id)}
+            onGiftDeselect={() => handleGiftDeselect(gift.id)}
+          />
+        ))}
+      </div>
     </div>
   );
 }

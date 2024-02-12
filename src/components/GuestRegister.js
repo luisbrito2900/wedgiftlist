@@ -12,11 +12,9 @@ const GuestRegister = () => {
     e.preventDefault();
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      // Registro exitoso, puedes redirigir o manejar el estado global de autenticación
-      navigate("/"); // Redirige a la página principal o a donde consideres apropiado
+      navigate("/");
     } catch (error) {
       console.error("Error en el registro:", error.message);
-      // Maneja el error mostrando un mensaje al usuario
     }
   };
 

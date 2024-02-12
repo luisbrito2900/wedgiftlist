@@ -1,33 +1,31 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { Link } from "react-router-dom"; // Asumiendo que estás usando react-router para la navegación
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   const auth = getAuth();
 
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      console.log("Registrado:", userCredential.user);
-      // Aquí puedes redirigir al usuario o manejar el estado de autenticación como prefieras
+      await createUserWithEmailAndPassword(auth, email, password);
+      navigate("/gifts");
     } catch (error) {
       console.error("Error en el registro:", error.message);
     }
   };
 
   return (
-    <div>
+    <div className="form-container">
       <h2>Registrarse</h2>
       <form onSubmit={handleRegister}>
         <input
           type="email"
+          className="form-input"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
@@ -35,16 +33,24 @@ const Register = () => {
         />
         <input
           type="password"
+          className="form-input"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Contraseña"
           required
         />
-        <button type="submit">Registrarse</button>
+        <button type="submit" className="form-button">
+          Registrarse
+        </button>
       </form>
-      <p>
-        Ya tienes una cuenta? <Link to="/login">Iniciar sesión</Link>
-      </p>
+      <div className="link-container">
+        <Link to="/homePage" className="form-link">
+          Volver a la página principal
+        </Link>
+        <Link to="/login" className="form-link">
+          ¿Ya tienes cuenta? Inicia sesión
+        </Link>
+      </div>
     </div>
   );
 };
