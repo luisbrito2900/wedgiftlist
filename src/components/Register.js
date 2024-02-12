@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { Link } from "react-router-dom";
+import { db } from "../firebase/firebase-config";
+import { doc, setDoc } from "firebase/firestore";
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const auth = getAuth();
@@ -14,7 +17,16 @@ const Register = () => {
     e.preventDefault();
     setError("");
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      await setDoc(doc(db, "users", user.uid), {
+        name: name,
+        email: email,
+      });
       navigate("/gifts");
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
@@ -30,6 +42,14 @@ const Register = () => {
     <div className="form-container">
       <h2>Registrarse</h2>
       <form onSubmit={handleRegister}>
+        <input
+          type="text"
+          className="form-input"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Nombre completo"
+          required
+        />
         <input
           type="email"
           className="form-input"

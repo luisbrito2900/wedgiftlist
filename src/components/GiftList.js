@@ -2,7 +2,15 @@ import React, { useState, useEffect } from "react";
 import GiftItem from "./GiftItem";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import { collection, getDocs, doc, updateDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  getDocs,
+  getDoc,
+  doc,
+  updateDoc,
+  Timestamp,
+} from "firebase/firestore";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { db, auth } from "../firebase/firebase-config";
@@ -36,8 +44,25 @@ function GiftList() {
     if (selectedGiftId) {
       const giftRef = doc(db, "gifts", selectedGiftId);
       const selectedGift = gifts.find((gift) => gift.id === selectedGiftId);
-      if (selectedGift && selectedGift.quantity > 0) {
+      const user = auth.currentUser;
+
+      if (selectedGift && selectedGift.quantity > 0 && user) {
+        const userDocRef = doc(db, "users", user.uid);
+        const userDoc = await getDoc(userDocRef);
+        const userName = userDoc.exists()
+          ? userDoc.data().name
+          : "Usuario Desconocido";
+
         await updateDoc(giftRef, { quantity: selectedGift.quantity - 1 });
+
+        await addDoc(collection(db, "selecciones"), {
+          userId: user.uid,
+          userName: userName,
+          giftId: selectedGiftId,
+          giftName: selectedGift.name,
+          timestamp: Timestamp.now(),
+        });
+
         setShowModal(false);
         fetchGifts();
       }
