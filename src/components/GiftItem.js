@@ -27,7 +27,7 @@ function GiftItem({ gift, onOpenModal }) {
             data-testid="selectGiftBtn"
             onClick={() => onOpenModal(gift.id)}
             variant="primary"
-            disabled={gift.quantity === 0} // Se deshabilita si no quedan regalos disponibles
+            disabled={gift.quantity === 0}
           >
             Seleccionar regalo
           </Button>
