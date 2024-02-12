@@ -1,8 +1,7 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
-import { BsTrash } from "react-icons/bs";
 
-function GiftItem({ gift, onGiftSelect, onGiftDeselect }) {
+function GiftItem({ gift, onOpenModal }) {
   return (
     <div className="gift-item card mb-3">
       <div className="card-header">
@@ -15,7 +14,7 @@ function GiftItem({ gift, onGiftSelect, onGiftDeselect }) {
           className="card-img-top hover-image"
         />
         <p className="card-text" data-testid="price">
-          Precio: ${gift.price}
+          Precio: RD${gift.price}
         </p>
         <div
           style={{
@@ -25,17 +24,10 @@ function GiftItem({ gift, onGiftSelect, onGiftDeselect }) {
           }}
         >
           <Button
-            data-testid="removeGiftBtn"
-            onClick={() => onGiftDeselect(gift.id)}
-            variant="danger"
-            className="me-2"
-          >
-            <BsTrash />
-          </Button>
-          <Button
             data-testid="selectGiftBtn"
-            onClick={() => onGiftSelect(gift.id)}
+            onClick={() => onOpenModal(gift.id)}
             variant="primary"
+            disabled={gift.quantity === 0} // Se deshabilita si no quedan regalos disponibles
           >
             Seleccionar regalo
           </Button>

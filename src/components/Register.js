@@ -20,7 +20,7 @@ const Register = () => {
       if (error.code === "auth/email-already-in-use") {
         setError("Este correo ya se encuentra registrado.");
       } else {
-        setError("Ocurrió un error al intentar registrar el usuario."); // Manejo de otros errores
+        setError("Ocurrió un error al intentar registrar el usuario.");
       }
       console.error("Error en el registro:", error.message);
     }
@@ -50,7 +50,7 @@ const Register = () => {
           Registrarse
         </button>
       </form>
-      {error && <p className="error-message">{error}</p>} {}
+      {error && <p className="error-message">{error}</p>}
       <div className="link-container">
         <Link to="/homePage" className="form-link">
           Volver a la página principal
