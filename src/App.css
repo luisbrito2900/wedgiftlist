@@ -176,3 +176,8 @@
   text-align: center; /* Centra el texto */
   width: 100%; /* Asegura que el título se extienda a lo ancho */
 }
+
+.error-message {
+  color: red; /* Color rojo para los mensajes de error */
+  margin-top: 10px; /* Margen superior para separarlo del formulario */
+}

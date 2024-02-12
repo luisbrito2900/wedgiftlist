@@ -6,15 +6,22 @@ import { Link } from "react-router-dom";
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const auth = getAuth();
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setError("");
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       navigate("/gifts");
     } catch (error) {
+      if (error.code === "auth/email-already-in-use") {
+        setError("Este correo ya se encuentra registrado.");
+      } else {
+        setError("Ocurrió un error al intentar registrar el usuario."); // Manejo de otros errores
+      }
       console.error("Error en el registro:", error.message);
     }
   };
@@ -43,6 +50,7 @@ const Register = () => {
           Registrarse
         </button>
       </form>
+      {error && <p className="error-message">{error}</p>} {}
       <div className="link-container">
         <Link to="/homePage" className="form-link">
           Volver a la página principal

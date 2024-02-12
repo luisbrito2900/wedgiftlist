@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const auth = getAuth();
 
@@ -15,6 +16,17 @@ const Login = () => {
       await signInWithEmailAndPassword(auth, email, password);
       navigate("/gifts");
     } catch (error) {
+      switch (error.code) {
+        case "auth/invalid-credential":
+          setError(
+            "Correo o contraseña invalido. Por favor, inténtalo de nuevo."
+          );
+          break;
+        default:
+          setError(
+            "Ocurrió un error al intentar iniciar sesión." + error.message
+          );
+      }
       console.error("Error en el inicio de sesión:", error.message);
     }
   };
@@ -43,6 +55,7 @@ const Login = () => {
           Iniciar sesión
         </button>
       </form>
+      {error && <p className="error-message">{error}</p>} {}
       <div className="link-container">
         <Link to="/homePage" className="form-link">
           Volver a la página principal
