@@ -98,15 +98,20 @@ function GiftList() {
       <div className="message-box form-container" id="weddgiftlistcontainer">
         <p className="message-box form-container text-justify main-text">
           Bienvenidos (as) a la lista de regalos para la boda de Luis y Perla.
-          Tu presencia en nuestra boda es uno de los mejores regalos que
-          podríamos recibir, pero si deseas hacernos un regalo apreciaríamos
-          mucho su contribución en efectivo para ayudarnos a comenzar esta nueva
-          etapa juntos. De igual manera, a continuación, se encuentran los
-          artículos que complementan la lista de regalos, los mismos se
-          encuentran en plaza lama, en caso de no poder ir hasta el lugar para
-          adquirirlos, puedes hacerle una transferencia a los novios del monto
-          total del articulo seleccionado y en caso de adquirirlos, por favor
-          hacerlo llegar a los novios con anterioridad a la boda.
+          Su presencia en nuestra boda es uno de los mejores regalos que
+          podríamos recibir, pero si desea hacernos un regalo apreciaríamos
+          mucho su contribución para ayudarnos a comenzar esta nueva etapa
+          juntos. Por ende, un poco mas abajo, se encuentran los artículos que
+          complementan la lista de regalos, los mismos se encuentran en plaza
+          lama, en caso de no poder ir hasta el lugar para adquirirlos, puedes
+          hacerle una transferencia a los novios del monto total del articulo
+          seleccionado y en caso de adquirirlos, por favor hacerlo llegar a los
+          novios con anterioridad a la boda.
+        </p>
+        <p className="message-box form-container text-justify main-text seccond-text">
+          Ya sea que decidas hacer transferencia de efectivo o comprar el regalo
+          en la tienda, por favor asegurate de seleccionar el regalo y confirmar
+          tu eleccion en la lista de regalos que se encuentra debajo.
         </p>
         <p
           style={{ textAlign: "center " }}
@@ -175,6 +180,9 @@ function GiftList() {
           </p>
         </div>
       </div>
+      <p style={{ color: "red", fontWeight: "bold", textAlign: "center" }}>
+        RECUERDE, ESTOS ARTICULOS ESTAN DISPONIBLES EN PLAZA LAMA.
+      </p>
       <h1 className="gift-list-title">Lista de Regalos</h1>
       {currentUser && (
         <button onClick={handleLogoutPrompt} className="logout-button">
