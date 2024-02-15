@@ -102,16 +102,16 @@ function GiftList() {
           podríamos recibir, pero si desea hacernos un regalo apreciaríamos
           mucho su contribución para ayudarnos a comenzar esta nueva etapa
           juntos. Por ende, un poco mas abajo, se encuentran los artículos que
-          complementan la lista de regalos, los mismos se encuentran en plaza
-          lama, en caso de no poder ir hasta el lugar para adquirirlos, puedes
+          complementan la lista de regalos, los mismos se encuentran en Plaza
+          Lama, en caso de no poder ir hasta el lugar para adquirirlos, puede
           hacerle una transferencia a los novios del monto total del articulo
           seleccionado y en caso de adquirirlos, por favor hacerlo llegar a los
           novios con anterioridad a la boda.
         </p>
         <p className="message-box form-container text-justify main-text seccond-text">
-          Ya sea que decidas hacer transferencia de efectivo o comprar el regalo
-          en la tienda, por favor asegurate de seleccionar el regalo y confirmar
-          tu eleccion en la lista de regalos que se encuentra debajo.
+          Ya sea que decida hacer transferencia de efectivo o comprar el regalo
+          en la tienda, por favor asegurese de seleccionar el regalo y confirmar
+          su elección en la lista de regalos que se encuentra debajo.
         </p>
         <p
           style={{ textAlign: "center " }}
