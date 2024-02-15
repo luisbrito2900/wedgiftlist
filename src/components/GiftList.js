@@ -184,11 +184,14 @@ function GiftList() {
         RECUERDE, ESTOS ARTICULOS ESTAN DISPONIBLES EN PLAZA LAMA.
       </p>
       <h1 className="gift-list-title">Lista de Regalos</h1>
-      {currentUser && (
-        <button onClick={handleLogoutPrompt} className="logout-button">
-          Cerrar sesión
-        </button>
-      )}
+      <div className="logout-container">
+        {currentUser && (
+          <button onClick={handleLogoutPrompt} className="logout-button">
+            Cerrar sesión
+          </button>
+        )}
+      </div>
+
       <Modal
         show={showLogoutConfirmModal}
         onHide={() => setShowLogoutConfirmModal(false)}

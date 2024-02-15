@@ -8,6 +8,7 @@
   font-size: calc(10px + 2vmin);
   color: rgb(87, 84, 84);
   box-shadow: 0 2px 4px rgba(12, 12, 12, 0.719);
+  position: relative;
 }
 
 .gift-item {
@@ -150,7 +151,7 @@
 }
 
 .logout-button {
-  position: fixed;
+  position: absolute;
   top: 20px;
   right: 20px;
   padding: 10px 20px;
@@ -224,4 +225,9 @@
 .seccond-text {
   margin-top: -45px;
   margin-bottom: 40px;
+}
+
+.logout-container {
+  text-align: right; /* Alinea el botón a la derecha */
+  padding-right: 20px; /* Ajusta según necesidad para alinear con el diseño */
 }
